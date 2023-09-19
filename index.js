@@ -2,8 +2,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+const mhsRouter = require('./routes/mahasiswa');
+app.use('/api/mhs', mhsRouter);
+
 app.get('/', (req, res) =>{
-    res.send('Halo Rehan')
+    res.send('Ohayo Gozaimasu')
 })
 
 app.listen(port, () => {
