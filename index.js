@@ -8,6 +8,8 @@ app.use(bodyPS.json());
 
 const mhsRouter = require('./routes/mahasiswa');
 app.use('/api/mhs', mhsRouter);
+const jrsRouter = require('./routes/jurusan');
+app.use('/api/jrs', jrsRouter);
 
 //membuat route baru dengan method Get yang isinya kalimat ohayo gozaimasu
 //app.get('/', (req, res) =>{
