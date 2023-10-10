@@ -132,6 +132,7 @@ router.patch('/update/:id', upload.single("gambar") ,[
             nama: req.body.nama,
             nrp: req.body.nrp,
             id_jurusan: req.body.id_jurusan,
+            gambar: gambar,
         }
         connection.query(`update mahasiswa set ? where id_m = ${id}`, Data, function (err, rows){
             if(err){
@@ -150,18 +151,20 @@ router.patch('/update/:id', upload.single("gambar") ,[
 })
 router.delete('/delete/(:id)', function(req, res){
     let id = req.params.id;
-    connection.query(`delete from mahasiswa where id_m = ${id}`, function (err, rows){
-        if(err){
-            return res.status(500).json({
-                status: false,
-                message: 'Server Error',
-            })
-        }else{
-            return res.status(200).json({
-                status: true,
-                message: 'Data has been delete !',
-            })
-        }
+
+        connection.query(`delete from mahasiswa where id_m = ${id}`, function (err, rows){
+            if(err){
+                return res.status(500).json({
+                    status: false,
+                    message: 'Server Error',
+                })
+            }else{
+                return res.status(200).json({
+                    status: true,
+                    message: 'Data has been delete !',
+                })
+            }
+        })
     })
-})
+
 module.exports = router;
