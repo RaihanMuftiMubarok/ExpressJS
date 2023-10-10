@@ -151,7 +151,25 @@ router.patch('/update/:id', upload.single("gambar") ,[
 })
 router.delete('/delete/(:id)', function(req, res){
     let id = req.params.id;
-
+    connection.query(`select * from mahasiswa where id_m = ${id}`, function (err, rows){
+        if(err){
+            return res.status(500).json({
+                status: false,
+                message: 'Server Error',
+            })
+        }if(rows.length <=0){
+            return res.status(404).json({
+                status: false,
+                message: 'Not Found',
+            })
+        }
+        const namaFileLama = rows[0].gambar;
+    
+        //hapus file lama
+        if (namaFileLama){
+            const pathFileLama = path.join(__dirname,'../public/images', namaFileLama);
+            fs.unlinkSync(pathFileLama);
+        }
         connection.query(`delete from mahasiswa where id_m = ${id}`, function (err, rows){
             if(err){
                 return res.status(500).json({
@@ -166,5 +184,5 @@ router.delete('/delete/(:id)', function(req, res){
             }
         })
     })
-
+})
 module.exports = router;
