@@ -179,12 +179,17 @@ router.delete('/delete/(:id)', function(req, res){
                 message: 'Not Found',
             })
         }
-        const namaFileLama = rows[0].gambar;
+        const gambarLama = rows[0].gambar;
+        const swa_fotoLama = rows[0].swa_foto;
     
         //hapus file lama
-        if (namaFileLama){
-            const pathFileLama = path.join(__dirname,'../public/images', namaFileLama);
-            fs.unlinkSync(pathFileLama);
+        if (gambarLama){
+            const pathGambar = path.join(__dirname,'../public/images', gambarLama);
+            fs.unlinkSync(pathGambar);
+        }
+        if (swa_fotoLama){
+            const pathSwaFoto = path.join(__dirname,'../public/images', swa_fotoLama);
+            fs.unlinkSync(pathSwaFoto);
         }
         connection.query(`delete from mahasiswa where id_m = ${id}`, function (err, rows){
             if(err){
