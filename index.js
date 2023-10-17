@@ -1,11 +1,13 @@
 const express = require('express')//membuat variable baru dengan nama express 
 const app = express()//membuat variable baru dengan nama app yang isisnya variable express
 const port = 3000 // membuat variable dengan nama port yang isinya 3000 
+const cors = require('cors')
 
 const bodyPS = require('body-parser');
 app.use(bodyPS.urlencoded({ extended: false}));
 app.use(bodyPS.json());
 
+app.use(cors())
 const mhsRouter = require('./routes/mahasiswa');
 app.use('/api/mhs', mhsRouter);
 const jrsRouter = require('./routes/jurusan');
