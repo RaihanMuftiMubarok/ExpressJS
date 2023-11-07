@@ -21,6 +21,10 @@ app.use('/api/jrs', jrsRouter);
     //res.send('Ohayo Gozaimasu')
 //})
 //kita listen Express.js ke dalam port yang  kita buat diatas
+
+const auth = require('./routes/auth/auth');
+app.use('/api/auth', auth);
+
 app.listen(port, () => {
     //dan kita tampilkan log sebagai penanda bahwa Express.js berhasil dijalankan
     console.log(`aplikasi berjalan di http:://localhost:${port}`)
